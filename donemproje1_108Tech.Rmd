@@ -1,0 +1,344 @@
+## **Q1 : IMS platformunun belirlenmesi**
+
+### Lisans
+
+SuiteCRM, açık kaynaklı bir müşteri ilişkileri yönetimi (CRM)
+platformudur ve GNU Affero Genel Kamu Lisansı (AGPL) v3 ile
+lisanslanmıştır. Bu lisans, kullanıcıların yazılımı özgürce
+kullanmasına, değiştirmesine ve dağıtmasına izin verirken, aynı zamanda
+değiştirilmiş sürümlerin de aynı lisans altında dağıtılmasını zorunlu
+kılar.
+
+### Kısa Tarihçesi
+
+SuiteCRM, 2013 yılında SugarCRM Community Edition'ın devamı olarak
+SalesAgility tarafından geliştirilmeye başlanmıştır. SugarCRM, ticari
+sürümlere odaklandığı için açık kaynak topluluğu SuiteCRM'yi başlatarak
+açık kaynaklı CRM çözümlerine olan talepleri karşılamayı amaçlamıştır.
+SuiteCRM, SugarCRM'nin kod tabanını temel almış ve zaman içinde kendi
+özelliklerini ve iyileştirmelerini ekleyerek büyümeye devam etmiştir.
+
+### Kullanıcıya Sunduğu Özellikler
+
+SuiteCRM, kullanıcılarına kapsamlı bir CRM deneyimi sunar. İşte başlıca
+özellikleri:
+
+-   Satış Yönetimi: Potansiyel müşteriler, fırsatlar ve teklifler
+    yönetimi.
+
+-   Pazarlama Otomasyonu: Kampanya yönetimi, e-posta pazarlama, hedef
+    listeleri oluşturma.
+
+-   Müşteri Desteği: Destek talepleri, bilgi tabanı, müşteri geri
+    bildirimleri.
+
+-   Raporlama ve Analitik: Kapsamlı raporlar, görsel gösterge panoları,
+    veri analizi.
+
+-   Proje Yönetimi : Proje planlama, görev yönetimi, zaman takibi.
+
+-   Mobil Uyumlu: Mobil cihazlar için optimize edilmiş arayüzler.
+
+-   Sosyal CRM : Sosyal medya entegrasyonları.
+
+-   Doküman Yönetimi: Doküman depolama ve yönetimi.
+
+-   Eklenti ve Modüller: Ekstra işlevsellik sağlayan modüller ve
+    eklentiler.
+
+-   Gelişmiş Güvenlik: Rol bazlı erişim kontrolleri ve güvenlik
+    özellikleri.
+
+### Platformun Kullandığı Yazılım, Veritabanı ve Diğer Teknolojiler
+
+SuiteCRM, çeşitli teknolojiler kullanılarak geliştirilmiştir. İşte
+bazıları:
+
+-   Yazılım: PHP
+
+-   Veritabanı: MySQL veya MariaDB
+
+-   Web Sunucusu: Apache veya Nginx
+
+-   İstemci Tarafı Teknolojileri : JavaScript, HTML, CSS
+
+-   İşletim Sistemi : Platform bağımsız (Linux, Windows, MacOS)
+
+### API Özellikleri
+
+SuiteCRM, RESTful API'ler ve SOAP API'ler sunar. Bu API'ler sayesinde
+dış uygulamalarla entegrasyon sağlanabilir. API'lerin sunduğu başlıca
+özellikler şunlardır:
+
+-   Veri Erişimi: Modüller ve kayıtlar üzerinde CRUD (Create, Read,
+    Update, Delete) işlemleri.
+
+-   Oturum Yönetimi : Kullanıcı oturumlarının yönetimi.
+
+-   Arama İşlemleri Kayıtlar arasında arama yapma.
+
+-   E-posta Gönderimi : E-posta kampanyalarının yönetimi ve gönderimi.
+
+-   Raporlama : Veri raporlarının çekilmesi ve analizi.
+
+-   Kullanıcı Yönetimi : Kullanıcı ve rol yönetimi.
+
+### IMS Kategorisi / Platform Seçiminde Rol Oynayan Sebepler
+
+SuiteCRM gibi bir platform seçilmesinde çeşitli sebepler rol
+oynayabilir. İşte bunlardan bazıları:
+
+-   Özel İlgi Alanları : Açık kaynaklı yazılım çözümlerine olan ilgi ve
+    katkı sağlama isteği.
+
+-   Daha Önceki Deneyimler : Daha önce SugarCRM veya benzeri CRM
+    platformları ile çalışma deneyimi.
+
+-   Sektör Hacmi ve Popülerliği : CRM pazarının büyüklüğü ve
+    SuiteCRM'nin popülerliği.
+
+-   Maliyet : SuiteCRM'nin açık kaynak ve ücretsiz olması, lisans
+    maliyetlerini düşürmesi.
+
+-   Esneklik ve Özelleştirilebilirlik : SuiteCRM'nin modüler yapısı ve
+    özelleştirilebilir olması.
+
+-   Topluluk Desteği : Geniş bir kullanıcı ve geliştirici topluluğunun
+    varlığı, destek ve kaynakların bolluğu.
+
+-   Entegrasyon Yeteneği : SuiteCRM'nin çeşitli üçüncü parti uygulamalar
+    ve hizmetlerle entegrasyon yetenekleri.
+
+SuiteCRM, esnek yapısı, güçlü özellikleri ve açık kaynaklı doğası ile
+birçok işletmenin CRM ihtiyaçlarını karşılayabilecek yetkinliktedir. Bu
+rapor, SuiteCRM hakkında genel bir bilgi sağlamayı amaçlamaktadır ve
+platformun avantajları ve kullanım alanları hakkında fikir vermektedir.
+
+## **Q2 : Dataset tanımı**
+
+#### Veri Kaynağı:
+
+Veri seti, Kaggle.com'dan temin edilmiştir. Kaggle, veri bilimcileri ve
+makine öğrenimi meraklıları için popüler bir platformdur ve çeşitli veri
+setleri sağlar.
+
+#### İçerik:
+
+Veri seti, yaklaşık 2500 müşterinin adı-soyadı, yaşı, medeni durumu,
+gelir seviyesi, harcama oranı, kaç çocuklu olduğu, eğitim seviyesi gibi
+bilgileri içermektedir.
+
+#### Veri Toplama Şartları:
+
+Veri seti, kullanıcılar tarafından gönüllü olarak sağlanan ve
+anonimleştirilmiş bilgilerden oluşmaktadır. Bu, veri gizliliği ve
+güvenliği açısından önemlidir.
+
+#### Format:
+
+Veri seti genellikle CSV (Comma-Separated Values) formatında
+sunulmaktadır. Bu format, veri analizi ve işleme için yaygın olarak
+kullanılan bir formattır.
+
+#### Boyut:
+
+Veri seti, yaklaşık 2500 satır ve birkaç sütundan oluşmaktadır. Satırlar
+her bir müşteriyi, sütunlar ise müşterilere ait özellikleri temsil
+etmektedir.
+
+### Veriyi IMS'e İthal Etme Planı:
+
+#### Veri Hazırlığı:
+
+-   İlk olarak, veriyi temizleyip doğrulamak için bir ön işleme aşaması
+    gerçekleştirilecektir. Eksik veya hatalı veriler düzeltilecek veya
+    uygun şekilde işaretlenecektir.
+
+-   Veri Formatlama: CSV dosyasındaki veriler, SuiteCRM'nin veri ithal
+    etme gereksinimlerine uygun hale getirilecektir. Bu, sütun adlarının
+    doğru bir şekilde eşleştirilmesini ve veri tiplerinin uyumlu
+    olmasını içerir.
+
+-   Veri İthali: SuiteCRM'nin veri ithalat aracı kullanılarak veriler
+    sisteme yüklenecektir. Bu süreçte, SuiteCRM'nin sunduğu arayüz veya
+    REST API'ler kullanılabilir.
+
+### Veriyi R ile Çekme Planı:
+
+-   API Kullanımı: SuiteCRM'nin RESTful API'leri kullanılarak veriler R
+    ortamına çekilecektir. API üzerinden veri çekmek, otomatik ve güncel
+    veri alımı sağlar.
+
+-   Veritabanı Bağlantısı: Alternatif olarak, SuiteCRM'nin kullandığı
+    MySQL veritabanına doğrudan bağlantı kurularak veri çekilebilir.
+    R'da DBI ve RMySQL paketleri kullanılarak veritabanına erişim
+    sağlanabilir.
+
+## **Q3 : İş tanımı**
+
+### 108 Tech: Müşteri Veri Analizi Şirketi
+
+#### Kuruluş Tanımı
+
+108 Tech, müşterilerimizin verilerini analiz ederek doğru kitleye
+hedefli indirimler sağlamak amacıyla faaliyet gösteren bir müşteri veri
+analizi şirketidir. Amacımız, müşterilerimizin satış ve pazarlama
+stratejilerini optimize etmelerine yardımcı olmak ve daha yüksek dönüşüm
+oranları elde etmelerini sağlamaktır.
+
+##### Aktiviteler ve Rutin Operasyonlar
+
+-   Veri Toplama ve Hazırlık
+
+-   Müşterilerimizden gelen veri setlerinin toplanması.
+
+-   Verilerin temizlenmesi ve formatlanması.
+
+-   Eksik verilerin tamamlanması ve doğrulanması.
+
+    #### 2. Veri Analizi
+
+-   Veri madenciliği ve modelleme tekniklerinin kullanılması.
+
+-   İstatistiksel analiz ve veri görselleştirme.
+
+-   Makine öğrenimi algoritmalarının uygulanması.
+
+#### 3. Hedef Kitle Segmentasyonu
+
+-   Müşteri davranışları ve demografik özelliklere göre segmentasyon
+    yapılması.
+
+-   Satın alma alışkanlıklarının ve müşteri değerinin analiz edilmesi.
+
+#### 4. İndirim Stratejileri Geliştirme
+
+-   Hedef kitleye uygun indirim kampanyalarının tasarlanması.
+
+-   Farklı indirim stratejilerinin etkisinin değerlendirilmesi.
+
+#### 5. Raporlama ve Tavsiyeler
+
+-   Analiz sonuçlarının detaylı raporlar halinde sunulması.
+
+-   Stratejik tavsiyelerin verilmesi ve uygulanabilir çözümler
+    önerilmesi.
+
+## Gelir Modeli
+
+\- Proje Bazlı Ücretlendirme: Belirli projeler veya analizler için
+müşterilerden alınan tek seferlik ücretler.
+
+\- Abonelik Ücreti: Sürekli veri analizi ve raporlama hizmetleri için
+aylık veya yıllık abonelik ücretleri.
+
+\- Performans Tabanlı Ücretlendirme: Sağlanan hizmetlerin sağladığı ek
+gelir veya tasarruf üzerinden komisyon alınması.
+
+\- Ek Hizmetler: Özelleştirilmiş raporlar, danışmanlık hizmetleri ve
+entegrasyon çözümleri için ek ücretler.
+
+## Zorluklar ve Avantajlar
+
+### Zorluklar
+
+1\. Veri Kalitesi: Müşterilerden gelen verilerin eksik, hatalı veya
+düzensiz olması analizi zorlaştırabilir.
+
+2\. Gizlilik ve Güvenlik: Müşteri verilerinin güvenliği ve gizliliğinin
+sağlanması önemli bir önceliktir.
+
+3\. Teknolojik Gelişmeler: Veri analitiği ve makine öğrenimi
+teknolojilerinin hızla gelişmesi, sürekli güncel kalmayı gerektirir.
+
+4\. Rekabet: Veri analizi alanındaki yüksek rekabet, müşteri kazanımını
+ve sadakatini zorlaştırabilir.
+
+### Avantajlar
+
+1\. Veri Odaklı Yaklaşım : Karar verme süreçlerini veri ile
+destekleyerek daha etkili sonuçlar elde edilebilir.
+
+2\. Özelleştirilmiş Hizmetler : Müşterilere özel çözümler sunarak
+rekabet avantajı sağlanabilir.
+
+3\. Gelişmiş Teknoloji Kullanımı : Makine öğrenimi ve yapay zeka
+teknikleri ile daha derinlemesine ve isabetli analizler yapılabilir.
+
+4\. Müşteri Memnuniyeti : Doğru hedef kitleye ulaşan indirimler ile
+müşteri memnuniyeti ve sadakati artırılabilir.
+
+## Rakipler ve Karşılaştırma
+
+### Rakipler
+
+#### 1. Palantir
+
+\- Avantajları : Gelişmiş analitik platformlar, geniş müşteri portföyü,
+yüksek veri işleme kapasitesi.
+
+\- Dezavantajları : Yüksek maliyet, karmaşık entegrasyon süreçleri.
+
+#### 2. SAS Institute
+
+\- Avantajları : Uzun yıllara dayanan deneyim, güçlü analitik araçlar,
+kapsamlı eğitim ve destek hizmetleri.
+
+\- Dezavantajları : Yüksek lisans maliyetleri, kurulum ve öğrenme
+sürecinin uzun olması.
+
+#### 3. IBM Watson Analytics
+
+\- Avantajları : Güçlü yapay zeka ve makine öğrenimi yetenekleri, geniş
+veri entegrasyon seçenekleri.
+
+\- Dezavantajları : Kompleks yapı, yüksek maliyet, küçük işletmeler için
+fazla karmaşık olabilir.
+
+#### 4. Google Analytics 360
+
+\- Avantajları : Kullanıcı dostu arayüz, güçlü veri entegrasyonları,
+geniş kullanım alanı.
+
+\- Dezavantajları : Özelleştirme sınırlamaları, veri gizliliği
+endişeleri.
+
+### Bizim Avantajlarımız
+
+\- Esneklik ve Özelleştirme : 108 Tech olarak, müşterilere özel çözümler
+sunarak onların spesifik ihtiyaçlarına uygun hizmetler sağlıyoruz.
+
+\- Maliyet Etkinliği : Rekabetçi fiyatlandırma modellerimiz ile küçük ve
+orta ölçekli işletmelere de ulaşabiliyoruz.
+
+\- Gizlilik ve Güvenlik : Müşteri verilerinin güvenliğine ve gizliliğine
+verdiğimiz önem ile güven sağlıyoruz.
+
+\- Hızlı Uygulama : Daha küçük ve çevik bir ekip olarak, hızlı çözüm
+geliştirme ve uygulama yeteneğine sahibiz.
+
+108 Tech olarak, müşterilerimizin verilerini en iyi şekilde analiz
+ederek onlara değer katmaya ve pazarlama stratejilerini optimize etmeye
+devam ediyoruz. Bu süreçte karşılaştığımız zorlukların üstesinden
+gelerek avantajlarımızı en iyi şekilde kullanmayı hedefliyoruz.
+
+## **Q4 : İyileştirme (optimizasyon) stratejisi**
+
+*Projenin son döneminde R kodu yazarak yapacağınız veri analizi
+sırasında, ne türlü bir fayda sağlamayı planladığınızı ve bunu nasıl
+yapacağınızı anlatın. Örnek : masraf azaltması, karlılık arttırılması,
+piyasa genişletilmesi, üretim hızlandırılması vs vs.*
+
+R kodu yazarak yapacağınız veri analizi sırasında şu tür faydalar
+sağlamayı planlıyoruz:
+
+-   Maliyet Azaltması
+
+-   Karlılık Artırılması
+
+-   Piyasa Genişletilmesi
+
+-   Üretim Hızlandırılması
+
+Veri analizi ile müşteri segmentlerini belirleyip, pazarlama
+stratejilerini optimize ederek bu faydaları sağlamayı hedefliyoruz.
