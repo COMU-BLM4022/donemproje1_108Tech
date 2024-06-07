@@ -1,3 +1,15 @@
+---
+title: "Bilgi Yönetim Sistemleri -Proje Raporu : 
+Enes Güler, 200401081,
+Kadir Yavuz, 200401008,
+Yasemin Güneş, 190401021
+"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
 ## **Q1: İş probleminin tanımı**
 
 Bu projede, SuiteCRM kullanılarak yaklaşık 2500 müşteriden oluşan bir
@@ -22,14 +34,14 @@ edilmek üzere düzenlenmiş olan bu veri seti, müşterilerin segmentlere
 ayrılması ve pazarlama stratejilerinin belirlenmesi için
 kullanılacaktır.
 
-## **Q3: Veri seti keşifsel analizi** $$20 puan$$
+## **Q3: Veri seti keşifsel analizi** 
 
 ---
 title: "Keşifsel Veri Analizi"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
+```{r  echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(GGally)
@@ -37,7 +49,8 @@ library(ggcorrplot)
 
 ```
 
-```{r setup, include=FALSE}
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ## Veriyi Yükleme ve İnceleme
 # Bu bölümde veriyi yükleyecek ve ilk incelemeleri yapacağız.
 # Veriyi yükleme
@@ -63,17 +76,9 @@ colSums(is.na(data))
 
 ```
 
-```{r setup, include=FALSE}
-# Eksik değer içeren satırları kaldırın veya doldurun
-# data <- data %>% drop_na()  # Eksik değer içeren satırları kaldırır
 
-# veya eksik değerleri uygun şekilde doldurun
-data$Work_Experience[is.na(data$Work_Experience)] <- median(data$Work_Experience, na.rm = TRUE)
-data$Family_Size[is.na(data$Family_Size)] <- median(data$Family_Size, na.rm = TRUE)
-
-```
-
-```{r setup, include=FALSE}
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 # Tek Değişkenli Analiz
 # Bu bölümde her bir değişkenin tek başına incelenmesine odaklanacağız.
 
@@ -89,7 +94,8 @@ summary(data$Age)
 
 ```
 
-```{r setup, include=FALSE}
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 # Kategorik Değişkenlerin Bar Grafiği
 # Cinsiyet ve mezuniyet durumu gibi kategorik değişkenlerin dağılımını bar grafikleri ile inceliyoruz.
 
@@ -107,7 +113,8 @@ ggplot(data, aes(x = Graduated)) +
 
 ```
 
-```{r setup, include=FALSE}
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 # İki Değişkenli Analiz
 # Bu bölümde iki değişken arasındaki ilişkileri inceleyeceğiz.
 
@@ -134,7 +141,8 @@ ggplot(data, aes(x = Age, y = Work_Experience)) +
 
 ```
 
-```{r setup, include=FALSE}
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 # Çok Değişkenli Analiz
 # Bu bölümde birden fazla değişkenin birlikte incelenmesine odaklanacağız.
 
@@ -151,7 +159,8 @@ ggcorrplot(cor_matrix, lab = TRUE)
 ggpairs(data %>% select_if(is.numeric))
 
 ```
-```{r setup, include=FALSE}
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 #Raporun PDF Olarak Kaydedilmesi
 
 # Raporu PDF olarak kaydedin
@@ -184,6 +193,6 @@ strateji, her segment için özelleştirilmiş ve daha etkili pazarlama
 kampanyaları oluşturulmasını sağlayarak, satışlarımızı ve müşteri
 bağlılığımızı artırmada önemli bir rol oynayacaktır.
 
-## **Q6 : Çalışan platformun gösterildiği sesli anlatımlı video** $$30 puan$$
+## **Q6 : Çalışan platformun gösterildiği sesli anlatımlı video** 
 
 - https://youtu.be/NWV1AH4LUsM
