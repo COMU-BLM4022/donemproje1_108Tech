@@ -172,3 +172,16 @@ dev.off()
 Veri setini ithal etmek için öncelikle CRM sistemi üzerinden verimize uygun bir model
 oluşturup kolon adlarına ve tiplerine uygun bir şekilde belirledik. Ardından verileri arayüzde bulunan import seçeneği yardımıyla sisteme yüklemiş olduk.
 
+## **Q5 : Yapılması planlanan veri analizi** 
+
+
+- Bu veri setini kullanarak, müşterilerimizi dört segmente ayırmayı ve
+her bir segmente uygun pazarlama stratejileri geliştirmeyi amaçlıyoruz.
+Segmentlere ayrılmış müşterilere, ilgi alanlarına ve ihtiyaçlarına uygun
+ürünlerin reklamını yaparak, pazarlama etkinliğimizi artırmayı ve
+müşteri memnuniyetini en üst seviyeye çıkarmayı hedefliyoruz. Bu
+strateji, her segment için özelleştirilmiş ve daha etkili pazarlama
+kampanyaları oluşturulmasını sağlayarak, satışlarımızı ve müşteri
+bağlılığımızı artırmada önemli bir rol oynayacaktır.
+
+
