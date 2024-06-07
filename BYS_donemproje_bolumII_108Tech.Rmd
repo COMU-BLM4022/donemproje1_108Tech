@@ -21,3 +21,148 @@ oluşturulmuş ve CSV formatında sunulmuştur. SuiteCRM platformuna entegre
 edilmek üzere düzenlenmiş olan bu veri seti, müşterilerin segmentlere
 ayrılması ve pazarlama stratejilerinin belirlenmesi için
 kullanılacaktır.
+
+## **Q3: Veri seti keşifsel analizi** $$20 puan$$
+
+---
+title: "Keşifsel Veri Analizi"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(GGally)
+library(ggcorrplot)
+
+```
+
+```{r setup, include=FALSE}
+## Veriyi Yükleme ve İnceleme
+# Bu bölümde veriyi yükleyecek ve ilk incelemeleri yapacağız.
+# Veriyi yükleme
+data <- read.csv("Train.csv")
+
+# Verinin ilk birkaç satırına bakalım
+head(data)
+
+# Verinin yapısını inceleyelim
+str(data)
+
+# Eksik değerleri kontrol edelim
+summary(data)
+
+# Eksik Değerlerin Yönetimi
+# Eksik değerlerin sayısını kontrol edecek ve gerekirse bu değerleri dolduracağız.
+
+# Eksik değerlerin sayısını kontrol edin
+sum(is.na(data))
+
+# Eksik değerlerin sütun bazında sayısı
+colSums(is.na(data))
+
+```
+
+```{r setup, include=FALSE}
+# Eksik değer içeren satırları kaldırın veya doldurun
+# data <- data %>% drop_na()  # Eksik değer içeren satırları kaldırır
+
+# veya eksik değerleri uygun şekilde doldurun
+data$Work_Experience[is.na(data$Work_Experience)] <- median(data$Work_Experience, na.rm = TRUE)
+data$Family_Size[is.na(data$Family_Size)] <- median(data$Family_Size, na.rm = TRUE)
+
+```
+
+```{r setup, include=FALSE}
+# Tek Değişkenli Analiz
+# Bu bölümde her bir değişkenin tek başına incelenmesine odaklanacağız.
+
+
+# Yaş değişkeninin histogramı
+ggplot(data, aes(x = Age)) +
+  geom_histogram(binwidth = 5, fill = "blue", color = "black") +
+  theme_minimal() +
+  labs(title = "Histogram of Age")
+
+# Özet istatistikler
+summary(data$Age)
+
+```
+
+```{r setup, include=FALSE}
+# Kategorik Değişkenlerin Bar Grafiği
+# Cinsiyet ve mezuniyet durumu gibi kategorik değişkenlerin dağılımını bar grafikleri ile inceliyoruz.
+
+# Cinsiyet değişkeninin bar grafiği
+ggplot(data, aes(x = Gender)) +
+  geom_bar(fill = "orange", color = "black") +
+  theme_minimal() +
+  labs(title = "Bar Plot of Gender")
+
+# Mezuniyet durumunun bar grafiği
+ggplot(data, aes(x = Graduated)) +
+  geom_bar(fill = "green", color = "black") +
+  theme_minimal() +
+  labs(title = "Bar Plot of Graduation Status")
+
+```
+
+```{r setup, include=FALSE}
+# İki Değişkenli Analiz
+# Bu bölümde iki değişken arasındaki ilişkileri inceleyeceğiz.
+
+
+# Cinsiyete göre yaş dağılımı (box plot)
+ggplot(data, aes(x = Gender, y = Age)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Box Plot of Age by Gender")
+
+
+# Harcama Skoruna göre yaş dağılımı (box plot)
+ggplot(data, aes(x = Spending_Score, y = Age)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Box Plot of Age by Spending Score")
+
+
+# Yaş ve Çalışma Tecrübesi arasındaki ilişki (scatter plot)
+ggplot(data, aes(x = Age, y = Work_Experience)) +
+  geom_point() +
+  theme_minimal() +
+  labs(title = "Scatter Plot of Age vs Work Experience")
+
+```
+
+```{r setup, include=FALSE}
+# Çok Değişkenli Analiz
+# Bu bölümde birden fazla değişkenin birlikte incelenmesine odaklanacağız.
+
+
+# Tüm sayısal değişkenler arasındaki korelasyon matrisi
+numeric_data <- data %>% select_if(is.numeric)
+cor_matrix <- cor(numeric_data, use = "complete.obs")
+
+# Korelasyon matrisini görselleştirin
+ggcorrplot(cor_matrix, lab = TRUE)
+
+
+# Pair plot (GGally paketi ile)
+ggpairs(data %>% select_if(is.numeric))
+
+```
+```{r setup, include=FALSE}
+#Raporun PDF Olarak Kaydedilmesi
+
+# Raporu PDF olarak kaydedin
+pdf("Analiz_Report.pdf")
+print(ggplot(data, aes(x = Age)) + geom_histogram(binwidth = 5, fill = "blue", color = "black") + theme_minimal() + labs(title = "Histogram of Age"))
+print(ggplot(data, aes(x = Gender)) + geom_bar(fill = "orange", color = "black") + theme_minimal() + labs(title = "Bar Plot of Gender"))
+print(ggplot(data, aes(x = Graduated)) + geom_bar(fill = "green", color = "black") + theme_minimal() + labs(title = "Bar Plot of Graduation Status"))
+print(ggplot(data, aes(x = Gender, y = Age)) + geom_boxplot() + theme_minimal() + labs(title = "Box Plot of Age by Gender"))
+print(ggplot(data, aes(x = Spending_Score, y = Age)) + geom_boxplot() + theme_minimal() + labs(title = "Box Plot of Age by Spending Score"))
+print(ggplot(data, aes(x = Age, y = Work_Experience)) + geom_point() + theme_minimal() + labs(title = "Scatter Plot of Age vs Work Experience"))
+print(ggcorrplot(cor_matrix, lab = TRUE))
+print(ggpairs(data %>% select_if(is.numeric)))
+dev.off()
+```
