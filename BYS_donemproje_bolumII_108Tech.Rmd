@@ -11,3 +11,13 @@ avantajları kullanarak, müşteri ilişkileri yönetiminde veri toplama,
 analiz etme ve stratejik karar alma süreçlerini optimize etmeyi
 hedefliyoruz. Elde edilen sonuçlar doğrultusunda, işletmenin pazarlama
 verimliliğini artıracak stratejik kararlar almayı planlıyoruz.
+
+## **Q2: İş problemini çözmede kullanılacak data seti**
+
+Veri seti, Kaggle.com'dan temin edilmiştir ve yaklaşık 2500 müşterinin
+adı, yaşı, medeni durumu, gelir seviyesi, harcama oranı, çocuk sayısı ve
+eğitim seviyesi gibi bilgileri içermektedir. Bu veriler, yapay olarak
+oluşturulmuş ve CSV formatında sunulmuştur. SuiteCRM platformuna entegre
+edilmek üzere düzenlenmiş olan bu veri seti, müşterilerin segmentlere
+ayrılması ve pazarlama stratejilerinin belirlenmesi için
+kullanılacaktır.
