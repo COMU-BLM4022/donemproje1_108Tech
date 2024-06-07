@@ -166,3 +166,9 @@ print(ggcorrplot(cor_matrix, lab = TRUE))
 print(ggpairs(data %>% select_if(is.numeric)))
 dev.off()
 ```
+
+## **Q4: Veri setinin BYS platformuna ihtali** 
+
+Veri setini ithal etmek için öncelikle CRM sistemi üzerinden verimize uygun bir model
+oluşturup kolon adlarına ve tiplerine uygun bir şekilde belirledik. Ardından verileri arayüzde bulunan import seçeneği yardımıyla sisteme yüklemiş olduk.
+
