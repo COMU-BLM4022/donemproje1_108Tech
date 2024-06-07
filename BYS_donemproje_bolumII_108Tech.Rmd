@@ -1,0 +1,13 @@
+## **Q1: İş probleminin tanımı**
+
+Bu projede, SuiteCRM kullanılarak yaklaşık 2500 müşteriden oluşan bir
+veri seti üzerinde analizler gerçekleştirilecek. Veri seti, müşterilerin
+adı-soyadı, yaşı, medeni durumu, gelir seviyesi, harcama oranı, kaç
+çocuklu olduğu ve eğitim seviyesi gibi bilgileri içeriyor. Amacımız, bu
+verileri analiz ederek müşteri segmentasyonunu gerçekleştirmek, müşteri
+davranışlarını anlamak ve daha etkili pazarlama stratejileri
+geliştirmek. SuiteCRM'nin özelleştirilebilir yapısıyla sağladığı
+avantajları kullanarak, müşteri ilişkileri yönetiminde veri toplama,
+analiz etme ve stratejik karar alma süreçlerini optimize etmeyi
+hedefliyoruz. Elde edilen sonuçlar doğrultusunda, işletmenin pazarlama
+verimliliğini artıracak stratejik kararlar almayı planlıyoruz.
