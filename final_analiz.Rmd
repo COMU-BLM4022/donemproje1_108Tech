@@ -1,0 +1,259 @@
+---
+title: "BYS 108Tech Fİnal Veri Analizi"
+output: html_notebook
+---
+
+#  Metabase'e yüklediğimiz verileri api aracılığıyla alıyoruz
+## Not: Metabase local'de çalıştırılmıştır cloud makinelerde yaşanan sorunlardan dolayı.
+
+# API işlemleri
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(httr)
+library(jsonlite)
+
+# API anahtarı
+api_key <- "mb_anDjQg+q8WCVnGlCOuDgJL4EkpfLNqAwCODSQDd5udg="
+
+# API isteği
+response <- GET(
+  url = "http://localhost:3000/api/collection/root/items",
+  add_headers("x-api-key" = api_key)
+)
+
+# Train kartının ID'si
+train_card_id <- 3  # Daha önce bulduğumuz Train kartının ID'si
+
+# Kart verilerini sorgulama
+response <- POST(
+  url = paste0("http://localhost:3000/api/card/", train_card_id, "/query"),
+  add_headers("x-api-key" = api_key)
+)
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+# Veri Önişleme
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+# Boş bir veri çerçevesi oluştur
+df <- data.frame(matrix(ncol = length(train_data$data$results_metadata$columns)))
+
+# Sütun adlarını ata
+colnames(df) <- sapply(train_data$data$results_metadata$columns, function(x) x$name)
+
+# Her bir satır için döngü
+for (i in 1:2000) {
+  row_values <- train_data$data$rows[[i]]  # Satırın değerlerini al
+  
+  # Satırdaki değerleri düzleştir
+  flat_row_values <- unlist(row_values)
+  
+  if (length(flat_row_values) < 12) {
+    flat_row_values <- c(flat_row_values, rep(NA, 12 - length(flat_row_values)))
+  }
+
+  
+  # Veri çerçevesine satırı ekle
+  df[i, ] <- flat_row_values
+}
+
+# Veri çerçevesini yazdır
+head(df)
+
+
+# NA değerlerini içeren hücrelerin sayısını bul
+num_missing_values <- sum(is.na(df))
+
+# Toplam NA değerlerini yazdır
+print(num_missing_values)
+
+# Eksik değerlerin sütun bazında sayısı
+colSums(is.na(df))
+
+
+# Sütun bazında boş değerleri sil
+for (col in names(data)) {
+  data[[col]][data[[col]] == ""] <- NA  # Boş string ifadeleri NA ile değiştir
+  data <- na.omit(data)  # NA değerleri içeren satırları kaldır
+}
+
+
+```
+
+#  Veri Analizi
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+
+# Harcama skoru ve aile boyutu arasındaki ilişki
+spending_family_size_distribution <- df %>%
+  group_by(spending_score, family_size) %>%
+  summarise(count = n())
+
+# Grafik oluşturma
+ggplot(spending_family_size_distribution, aes(x = family_size, y = count, fill = spending_score)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Harcama Skoru ve Aile Boyutu Arasındaki İlişki",
+       x = "Aile Boyutu",
+       y = "Müşteri Sayısı",
+       fill = "Harcama Skoru") +
+  theme_minimal()
+
+# Segmentasyon ve cinsiyet arasındaki ilişki
+segmentation_gender_distribution <- df %>%
+  group_by(segmentation, gender) %>%
+  summarise(count = n())
+
+# Grafik oluşturma
+ggplot(segmentation_gender_distribution, aes(x = segmentation, y = count, fill = gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Segmentasyon ve Cinsiyete Göre Müşteri Dağılımı",
+       x = "Segment",
+       y = "Müşteri Sayısı",
+       fill = "Cinsiyet") +
+  theme_minimal()
+
+
+# Segment ve harcama skoru arasındaki ilişki
+segment_spending_distribution <- df %>%
+  group_by(segmentation, spending_score) %>%
+  summarise(count = n())
+
+# Grafik oluşturma
+ggplot(segment_spending_distribution, aes(x = segmentation, y = count, fill = spending_score)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Segment ve Harcama Skoruna Göre Müşteri Dağılımı",
+       x = "Segment",
+       y = "Müşteri Sayısı",
+       fill = "Harcama Skoru") +
+  theme_minimal()
+
+# Çalışma deneyimi ve harcama skoru arasındaki ilişki
+work_experience_spending_distribution <- df %>%
+  group_by(work_experience, spending_score) %>%
+  summarise(count = n())
+
+# Grafik oluşturma
+ggplot(work_experience_spending_distribution, aes(x = work_experience, y = count, fill = spending_score)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Çalışma Deneyimi ve Harcama Skoruna Göre Müşteri Dağılımı",
+       x = "Çalışma Deneyimi",
+       y = "Müşteri Sayısı",
+       fill = "Harcama Skoru") +
+  theme_minimal()
+
+# Yaş ve harcama skoru arasındaki ilişki
+age_spending_distribution <- df %>%
+  group_by(age, spending_score) %>%
+  summarise(count = n())
+
+# Grafik oluşturma
+ggplot(age_spending_distribution, aes(x = age, y = count, fill = spending_score)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Yaş ve Harcama Skoruna Göre Müşteri Dağılımı",
+       x = "Yaş",
+       y = "Müşteri Sayısı",
+       fill = "Harcama Skoru") +
+  theme_minimal()
+
+
+# Mezuniyet durumu ve harcama skoru arasındaki ilişki
+graduated_spending_distribution <- df %>%
+  group_by(graduated, spending_score) %>%
+  summarise(count = n())
+
+# Grafik oluşturma
+ggplot(graduated_spending_distribution, aes(x = graduated, y = count, fill = spending_score)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Mezuniyet Durumu ve Harcama Skoruna Göre Müşteri Dağılımı",
+       x = "Mezuniyet Durumu",
+       y = "Müşteri Sayısı",
+       fill = "Harcama Skoru") +
+  theme_minimal()
+
+# Meslek ve harcama skoru arasındaki ilişki
+profession_spending_distribution <- df %>%
+  group_by(profession, spending_score) %>%
+  summarise(count = n())
+
+# Grafik oluşturma
+ggplot(profession_spending_distribution, aes(x = profession, y = count, fill = spending_score)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Meslek ve Harcama Skoruna Göre Müşteri Dağılımı",
+       x = "Meslek",
+       y = "Müşteri Sayısı",
+       fill = "Harcama Skoru") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+# Cinsiyet ve segmente göre müşteri sayısı
+gender_segment_distribution <- df %>%
+  group_by(gender, segmentation) %>%
+  summarise(count = n())
+
+# Grafik oluşturma
+ggplot(gender_segment_distribution, aes(x = gender, y = count, fill = segmentation)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Cinsiyet ve Segmente Göre Müşteri Dağılımı",
+       x = "Cinsiyet",
+       y = "Müşteri Sayısı",
+       fill = "Segment") +
+  theme_minimal()
+
+```
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(GGally)
+library(ggcorrplot)
+library(caret)
+library(randomForest)
+
+data <- df
+head(data)
+
+sum(!complete.cases(data))
+
+# İlgili sütunları faktör türüne dönüştürme
+data$gender <- as.factor(data$gender)
+data$ever_married <- as.factor(data$ever_married)
+data$graduated <- as.factor(data$graduated)
+data$profession <- as.factor(data$profession)
+data$spending_score <- as.factor(data$spending_score)
+data$segmentation <- as.factor(data$segmentation)
+
+# Random Forest modeli oluşturma
+set.seed(123)
+rf_model <- randomForest(segmentation ~ gender + ever_married + age + graduated + profession + work_experience + family_size + spending_score, data = data, importance = TRUE)
+
+# Önemli özellikleri görselleştirme
+importance <- importance(rf_model)
+varImportance <- data.frame(Variables = rownames(importance), Importance = importance[, 'MeanDecreaseGini'])
+
+ggplot(varImportance, aes(x = reorder(Variables, Importance), y = Importance)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  xlab("Özellikler") +
+  ylab("Önem Düzeyi") +
+  ggtitle("Özelliklerin Önemi (Random Forest)") +
+  theme_minimal()
+
+
+######
+# Kontenjan tablosunu oluşturun
+kontenjan_tablosu <- table(data$gender, data$segmentation)
+
+# Kontenjan tablosunu görselleştirin
+barplot(kontenjan_tablosu, beside = TRUE, legend.text = TRUE, main = "Gender vs Segmentation", xlab = "Gender", ylab = "Count")
+
+```
+

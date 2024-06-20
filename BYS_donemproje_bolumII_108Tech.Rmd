@@ -1,0 +1,198 @@
+---
+title: "Bilgi Yönetim Sistemleri -Proje Raporu : 
+Enes Güler, 200401081,
+Kadir Yavuz, 200401008,
+Yasemin Güneş, 190401021
+"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+## **Q1: İş probleminin tanımı**
+
+Bu projede, SuiteCRM kullanılarak yaklaşık 2500 müşteriden oluşan bir
+veri seti üzerinde analizler gerçekleştirilecek. Veri seti, müşterilerin
+adı-soyadı, yaşı, medeni durumu, gelir seviyesi, harcama oranı, kaç
+çocuklu olduğu ve eğitim seviyesi gibi bilgileri içeriyor. Amacımız, bu
+verileri analiz ederek müşteri segmentasyonunu gerçekleştirmek, müşteri
+davranışlarını anlamak ve daha etkili pazarlama stratejileri
+geliştirmek. SuiteCRM'nin özelleştirilebilir yapısıyla sağladığı
+avantajları kullanarak, müşteri ilişkileri yönetiminde veri toplama,
+analiz etme ve stratejik karar alma süreçlerini optimize etmeyi
+hedefliyoruz. Elde edilen sonuçlar doğrultusunda, işletmenin pazarlama
+verimliliğini artıracak stratejik kararlar almayı planlıyoruz.
+
+## **Q2: İş problemini çözmede kullanılacak data seti**
+
+Veri seti, Kaggle.com'dan temin edilmiştir ve yaklaşık 2500 müşterinin
+adı, yaşı, medeni durumu, gelir seviyesi, harcama oranı, çocuk sayısı ve
+eğitim seviyesi gibi bilgileri içermektedir. Bu veriler, yapay olarak
+oluşturulmuş ve CSV formatında sunulmuştur. SuiteCRM platformuna entegre
+edilmek üzere düzenlenmiş olan bu veri seti, müşterilerin segmentlere
+ayrılması ve pazarlama stratejilerinin belirlenmesi için
+kullanılacaktır.
+
+## **Q3: Veri seti keşifsel analizi** 
+
+---
+title: "Keşifsel Veri Analizi"
+output: pdf_document
+---
+
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(GGally)
+library(ggcorrplot)
+
+```
+
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+## Veriyi Yükleme ve İnceleme
+# Bu bölümde veriyi yükleyecek ve ilk incelemeleri yapacağız.
+# Veriyi yükleme
+data <- read.csv("Train.csv")
+
+# Verinin ilk birkaç satırına bakalım
+head(data)
+
+# Verinin yapısını inceleyelim
+str(data)
+
+# Eksik değerleri kontrol edelim
+summary(data)
+
+# Eksik Değerlerin Yönetimi
+# Eksik değerlerin sayısını kontrol edecek ve gerekirse bu değerleri dolduracağız.
+
+# Eksik değerlerin sayısını kontrol edin
+sum(is.na(data))
+
+# Eksik değerlerin sütun bazında sayısı
+colSums(is.na(data))
+
+```
+
+
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Tek Değişkenli Analiz
+# Bu bölümde her bir değişkenin tek başına incelenmesine odaklanacağız.
+
+
+# Yaş değişkeninin histogramı
+ggplot(data, aes(x = Age)) +
+  geom_histogram(binwidth = 5, fill = "blue", color = "black") +
+  theme_minimal() +
+  labs(title = "Histogram of Age")
+
+# Özet istatistikler
+summary(data$Age)
+
+```
+
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Kategorik Değişkenlerin Bar Grafiği
+# Cinsiyet ve mezuniyet durumu gibi kategorik değişkenlerin dağılımını bar grafikleri ile inceliyoruz.
+
+# Cinsiyet değişkeninin bar grafiği
+ggplot(data, aes(x = Gender)) +
+  geom_bar(fill = "orange", color = "black") +
+  theme_minimal() +
+  labs(title = "Bar Plot of Gender")
+
+# Mezuniyet durumunun bar grafiği
+ggplot(data, aes(x = Graduated)) +
+  geom_bar(fill = "green", color = "black") +
+  theme_minimal() +
+  labs(title = "Bar Plot of Graduation Status")
+
+```
+
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# İki Değişkenli Analiz
+# Bu bölümde iki değişken arasındaki ilişkileri inceleyeceğiz.
+
+
+# Cinsiyete göre yaş dağılımı (box plot)
+ggplot(data, aes(x = Gender, y = Age)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Box Plot of Age by Gender")
+
+
+# Harcama Skoruna göre yaş dağılımı (box plot)
+ggplot(data, aes(x = Spending_Score, y = Age)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Box Plot of Age by Spending Score")
+
+
+# Yaş ve Çalışma Tecrübesi arasındaki ilişki (scatter plot)
+ggplot(data, aes(x = Age, y = Work_Experience)) +
+  geom_point() +
+  theme_minimal() +
+  labs(title = "Scatter Plot of Age vs Work Experience")
+
+```
+
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Çok Değişkenli Analiz
+# Bu bölümde birden fazla değişkenin birlikte incelenmesine odaklanacağız.
+
+
+# Tüm sayısal değişkenler arasındaki korelasyon matrisi
+numeric_data <- data %>% select_if(is.numeric)
+cor_matrix <- cor(numeric_data, use = "complete.obs")
+
+# Korelasyon matrisini görselleştirin
+ggcorrplot(cor_matrix, lab = TRUE)
+
+
+# Pair plot (GGally paketi ile)
+ggpairs(data %>% select_if(is.numeric))
+
+```
+```{r  echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#Raporun PDF Olarak Kaydedilmesi
+
+# Raporu PDF olarak kaydedin
+pdf("Analiz_Report.pdf")
+print(ggplot(data, aes(x = Age)) + geom_histogram(binwidth = 5, fill = "blue", color = "black") + theme_minimal() + labs(title = "Histogram of Age"))
+print(ggplot(data, aes(x = Gender)) + geom_bar(fill = "orange", color = "black") + theme_minimal() + labs(title = "Bar Plot of Gender"))
+print(ggplot(data, aes(x = Graduated)) + geom_bar(fill = "green", color = "black") + theme_minimal() + labs(title = "Bar Plot of Graduation Status"))
+print(ggplot(data, aes(x = Gender, y = Age)) + geom_boxplot() + theme_minimal() + labs(title = "Box Plot of Age by Gender"))
+print(ggplot(data, aes(x = Spending_Score, y = Age)) + geom_boxplot() + theme_minimal() + labs(title = "Box Plot of Age by Spending Score"))
+print(ggplot(data, aes(x = Age, y = Work_Experience)) + geom_point() + theme_minimal() + labs(title = "Scatter Plot of Age vs Work Experience"))
+print(ggcorrplot(cor_matrix, lab = TRUE))
+print(ggpairs(data %>% select_if(is.numeric)))
+dev.off()
+```
+
+## **Q4: Veri setinin BYS platformuna ihtali** 
+
+Veri setini ithal etmek için öncelikle CRM sistemi üzerinden verimize uygun bir model
+oluşturup kolon adlarına ve tiplerine uygun bir şekilde belirledik. Ardından verileri arayüzde bulunan import seçeneği yardımıyla sisteme yüklemiş olduk.
+
+## **Q5 : Yapılması planlanan veri analizi** 
+
+
+- Bu veri setini kullanarak, müşterilerimizi dört segmente ayırmayı ve
+her bir segmente uygun pazarlama stratejileri geliştirmeyi amaçlıyoruz.
+Segmentlere ayrılmış müşterilere, ilgi alanlarına ve ihtiyaçlarına uygun
+ürünlerin reklamını yaparak, pazarlama etkinliğimizi artırmayı ve
+müşteri memnuniyetini en üst seviyeye çıkarmayı hedefliyoruz. Bu
+strateji, her segment için özelleştirilmiş ve daha etkili pazarlama
+kampanyaları oluşturulmasını sağlayarak, satışlarımızı ve müşteri
+bağlılığımızı artırmada önemli bir rol oynayacaktır.
+
+## **Q6 : Çalışan platformun gösterildiği sesli anlatımlı video** 
+
+- https://youtu.be/NWV1AH4LUsM
